@@ -201,6 +201,7 @@ loss_val = sess.run(loss, feed_dict={x:batch_x, y:batch_y})
 ```
 
 ---
+### Advantages and Disadvantages of sess.run()
 
 @ul
 
