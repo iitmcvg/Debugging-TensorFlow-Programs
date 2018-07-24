@@ -1,12 +1,7 @@
-Debugging TensorFlow Programs
+## Debugging TensorFlow Programs
 
 ---
 
-Why debugging TensorFlow program is difficult?
+Before seeing why debugging tensorflow program is difficult, lets see a sample program written in TensorFlow.
 
-@ul
-
-- We build a computational graph when the program is written.
-- `session.run()` does the actual computation
-
-@ulend
++++?gist=codes/linear_regression.py&lang=Python&title=Linear Regression: Scala Snippet
