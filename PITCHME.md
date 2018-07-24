@@ -56,3 +56,32 @@ while True:
 @[25-26](Learning Rate and Optimizers are defined (Gradient Descent Optimization)
 @[28-30](Creating **Tensorflow Session** and running initialization operation)
 @[33-38](Training Loop)
+
+---
+
+In the above program, what will happen if I write 
+
+```python
+# Lets print the weights in linear regression model
+print (W)
+```
+
+Whats the output you expect?
+
++++
+
+```
+<tf.Variable 'Variable:0' shape=() dtype=float32_ref>
+```
+
+This is not the number we expected right?
+
+---
+
+In tensorflow we construct a `**Computational Graph**` when we write a program. Then we use `tf.Session()` to get values form the computational graph.
+
+For example, in the above linear regression model, the computational graph is like this
+
+![Linear_regression_graph](/images/linear_regression_graph.png)
+
+---
