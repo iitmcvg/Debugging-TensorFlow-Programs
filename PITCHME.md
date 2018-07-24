@@ -82,7 +82,7 @@ In tensorflow what happens whe you write a program is,
 @ul
 
 - Construction of Computational graph
-- Create a `tf.Session()` wrapper to access the values in the graph
+- Create a tf.Session() wrapper to access the values in the graph
 - Placeholders are input to the graph.
     - Use feed_dict to feed the values to the graph
 
@@ -99,7 +99,7 @@ In tensorflow what happens whe you write a program is,
 
 - The concept of Computational Graph
 - "Inversion of Control"
-    - The actual computation of the tensors happens only during `sess.run()`, **not during our python code definition we write**.
+    - The actual computation of the tensors happens only during sess.run(), **not during our python code definition we write**.
 - Intermidiate hidden layers remain hidden (unless we specify them with sess.run()). Normal print statements dont work the way intended.
 
 @ulend
@@ -127,10 +127,10 @@ In tensorflow what happens whe you write a program is,
 
 ### Different Debugging Techniques in Tensorflow
 
-- `sess.run()`
+- sess.run()
 - TensorBoard: Visualizing Learning
     - Different Plugins will be explored
-- `tf.Print()` Operation
-- `tf.assert()`
+- tf.Print( Operation
+- tf.assert()
 
 ---
