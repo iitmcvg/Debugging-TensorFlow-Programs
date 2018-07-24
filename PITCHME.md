@@ -134,3 +134,87 @@ In tensorflow what happens whe you write a program is,
 - tf.assert()
 
 ---
+
+### Monitoring Tensors using Session.run()
+
+```python
+x = tf.placeholder(tf.float32)
+y = tf.placeholder(tf.float32)
+
+W = tf.Variable(2.0)
+b = tf.Variable(1.0)
+
+yPred = W*x + b
+
+loss = tf.square(y - yPred)
+
+print (loss)
+print (sess.run(loss, feed_dict={x:2.0, y:4.0}))
+print (sess.run(loss, feed_dict={x:7.0}))
+print (sess.run(yPred, feed_dict={x:5.0}))
+print (sess.run(yPred, feed_dict={x:3.0, y=1.0}))
+```
+@[11](Whats the output? We saw it earlier right?)
+@[12](Output in this case?)
+@[13](Output in this case?)
+@[14](Output in this case?)
+@[15](Output in this case?)
+
+---
+
+The weights and actiivations can be obtained from the tensorflow graph.
+
+```python
+inputs = tf.placeholder(tf.float32, shape=(None, X_train.shape[1]), name='inputs')
+label = tf.placeholder(tf.float32, shape=(None, 2), name='labels')
+
+# First layer
+hid1_size = 128
+w1 = tf.Variable(tf.random_normal([hid1_size, X_train.shape[1]], stddev=0.01), name='w1')
+b1 = tf.Variable(tf.constant(0.1, shape=(hid1_size, 1)), name='b1')
+y1 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(w1, tf.transpose(inputs)), b1)), keep_prob=0.5)
+
+# Second layer
+hid2_size = 256
+w2 = tf.Variable(tf.random_normal([hid2_size, hid1_size], stddev=0.01), name='w2')
+b2 = tf.Variable(tf.constant(0.1, shape=(hid2_size, 1)), name='b2')
+y2 = tf.nn.dropout(tf.nn.relu(tf.add(tf.matmul(w2, y1), b2)), keep_prob=0.5)
+
+# Output layer
+wo = tf.Variable(tf.random_normal([2, hid2_size], stddev=0.01), name='wo')
+bo = tf.Variable(tf.random_normal([2, 1]), name='bo')
+yo = tf.transpose(tf.add(tf.matmul(wo, y2), bo))
+
+loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=yo, labels=label))
+```
+@[4-8](First Layer of the Feed forward Neural net)
+@[10-14](Second Layer of the Neural Net)
+@[16-19](Third Layer)
+@[21](The Cross Entropy Loss function)
+
++++
+
+```python
+# This is how we can inspect parameters of the network
+first_w, first_b, sec_w, sec_b = sess.run([w1, b1, w2, b2])
+loss_val = sess.run(loss, feed_dict={x:batch_x, y:batch_y})
+```
+
+---
+
+@ul
+
+- Similar to print statement kind of debugging
+- Easy to use
+- Difficult when analysing multi-dimensional arrays
+- Visualising interface not present
+- If the model is complex with many layers, handling many tensors can become cumbersome.
+
+@ulend
+
+---
+
+# TensorBoard
+
+---
+
