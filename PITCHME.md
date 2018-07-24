@@ -20,8 +20,10 @@ y = tf.placeholder(tf.float32)
 global_step_tensor = tf.train.get_or_create_global_step()
 
 
-W = tf.Variable(tf.random_uniform(shape = [],minval = 0,maxval = 100))
-b = tf.Variable(tf.random_uniform(shape = [],minval = -100,maxval = 100))
+W = tf.Variable(tf.random_uniform(shape = [],minval = 0,
+    maxval = 100))
+b = tf.Variable(tf.random_uniform(shape = [],minval = -100
+    ,maxval = 100))
 
 yPred = W*x + b
 
@@ -42,7 +44,8 @@ sess.run(init)
 merged = tf.summary.merge_all()
 train_writer = tf.summary.FileWriter('train_logs',sess.graph)
 while True:
-    _, summary, step, l2loss = sess.run([train_step, merged, global_step_tensor, loss], feed_dict={x:x_data, y:y_data })
+    _, summary, step, l2loss = sess.run([train_step, merged, global_step_tensor, loss],
+        feed_dict={x:x_data, y:y_data })
     train_writer.add_summary(summary, step)
     print ("Iteration: " + str(step) + " Loss: " + str(l2loss))
 ```
