@@ -78,10 +78,59 @@ This is not the number we expected right?
 
 ---
 
-In tensorflow we construct a `**Computational Graph**` when we write a program. Then we use `tf.Session()` to get values form the computational graph.
+In tensorflow what happens whe you write a program is,
+@ul
 
-For example, in the above linear regression model, the computational graph is like this
+- Construction of Computational graph
+- Create a `tf.Session()` wrapper to access the values in the graph
+- Placeholders are input to the graph.
+    - Use feed_dict to feed the values to the graph
+
+@ulend
+
++++
 
 ![Linear_regression_graph](/images/linear_regression_graph.png)
+
+---
+#### Why Debugging TensorFlow programs is difficult?
+
+@ul
+
+- The concept of Computational Graph
+- "Inversion of Control"
+    - The actual computation of the tensors happens only during `sess.run()`, **not during our python code definition we write**.
+- Intermidiate hidden layers remain hidden (unless we specify them with sess.run()). Normal print statements dont work the way intended.
+
+@ulend
+
+---
+
+# Debugging Facilities Present in Tensorflow
+
+---
+
+### Wishlist
+
+@ul
+
+- Inspect the hidden layers activations
+- Check the dimensions of tensors (to avoid shape mismatch)
+- Inspect the paramters of your model
+- Ability to use print statements
+- Visualizing tools for tensors in the program
+- Check for NaNs, inf in the models
+
+@ulend
+
+---
+
+### Different Debugging Techniques in Tensorflow
+
+- `sess.run()`
+- TensorBoard: Visualizing Learning
+    - Different Plugins will be explored
+- `tf.Print()` Operation
+- `tf.assert()`
 
 ---
