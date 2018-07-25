@@ -215,7 +215,75 @@ loss_val = sess.run(loss, feed_dict={x:batch_x, y:batch_y})
 
 ---
 
-# TensorBoard
+## TensorBoard: Visualizing Learning
 
 ---
 
+Training a massive deep neural network can be complex and confusing.
+
+TensorFlow provides a suite of visualization tools called TensorBoard, to make it easier to understand, debug, and optimize TensorFlow programs.
+
+![tensorboard](https://www.tensorflow.org/images/mnist_tensorboard.png)
+
+---
+
+#### Working of TensorBoard: Overview
+
+@ul
+
+- You need to record what you want to visualize. It can be scalar variables like accuracy or loss, images, multi-dimensional tensors, weights and biases, projections etc.
+- After you register what you want to visualise and how to visualise, you need to create a merged operation in the tensorflow graph
+- Then the serialized summary object which is created when this merged operation is executed, we must write it in the disk
+- Launch a local client server model architecture to visualise the data in the file stored in the disk
+
+@ulend
+
+---
+### Scalars
+
+@ul
+
+- Just numbers, unlike vectors, matrices or tensors.
+- Can be visualised in a graph where the value of the scalar varies with the iteration (global step)
+- Can you think of examples?
+    - Accuracy
+    - Loss Value
+    - In case of matrices or vectors, you can visualise a metric such as minimum value or maximum value in that tensor. (Mean and standard deviation are also used frequently).
+
+@ulend
+
+---
+
+Example: How to create tensorflow scalar summaries
+
+```python
+def create_scalar_summary(x):
+    with tf,name_scope('summaries'):
+        # Registering the operations we want to visualise
+        max = tf.reduce_max(x)
+        tf.summary.scalar('max', max)
+        tf.summary.scalar('min', tf.reduce_min(x))
+        tf.summary.scalar('mean', tf.reduce_mean(x))
+
+# Sample Call Statement
+create_scalar_summary(hidden_2)
+```
+
++++
+
+##### Image of tensorboard  (scalar) must come here
+
+---
+### Graph
+
+This plugin in is a tool we can use to visualize the computational graph that tensorflow builds. There are a lot of options available like checking TPU compatibility, in which devices operations are being executed, etc
+
+> Image of graph
+
+---
+
+Time to test your understanding !
+
+See the screenshot of the tensorflow graph attached. What do you notice?
+
+---
