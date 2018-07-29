@@ -233,7 +233,7 @@ TensorFlow provides a suite of visualization tools called TensorBoard, to make i
 
 @ul
 
-- You need to record what you want to visualize. It can be scalar variables like accuracy or loss, images, multi-dimensional tensors, weights and biases, projections etc.
+- You need to record what you want to visualize. It can be scalar variables, images, projections etc.
 - After you register what you want to visualise and how to visualise, you need to create a merged operation in the tensorflow graph
 - Then the serialized summary object which is created when this merged operation is executed, we must write it in the disk
 - Launch a local client server model architecture to visualise the data in the file stored in the disk
