@@ -223,6 +223,8 @@ Training a massive deep neural network can be complex and confusing.
 
 TensorFlow provides a suite of visualization tools called TensorBoard, to make it easier to understand, debug, and optimize TensorFlow programs.
 
++++
+
 ![tensorboard](https://www.tensorflow.org/images/mnist_tensorboard.png)
 
 ---
@@ -271,19 +273,40 @@ create_scalar_summary(hidden_2)
 
 +++
 
-##### Image of tensorboard  (scalar) must come here
+![scalar](images/loss_graphs.png)
 
 ---
 ### Graph
 
 This plugin in is a tool we can use to visualize the computational graph that tensorflow builds. There are a lot of options available like checking TPU compatibility, in which devices operations are being executed, etc
 
-> Image of graph
++++
+
+![graph](images/multi_gpu_graph.png)
 
 ---
 
 Time to test your understanding !
 
-See the screenshot of the tensorflow graph attached. What do you notice?
+Debug this program !!
 
----
+
++++
+
+Observations
+
+@ul
+
+Code written and runs with no errors
+The training slows down as the iterations increases
+The program stops running by throwing a resource exhausted error
+
+@ulend
+
++++
+
+#### Overview of the architecture
+
+![self-supervised-tracking](images/self-supervised-tracking.png)
+
++++
