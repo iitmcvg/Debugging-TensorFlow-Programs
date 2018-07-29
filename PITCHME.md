@@ -357,16 +357,115 @@ with tf.name_scope("layer1"):
  - Call the histogram summaries periodically and disable them when not needed.
 
 ---
-## Tensorflow Debugger UI
+## Tensorboard's Beholder Plugin
+
++++
+
+
+The Beholder plugin shows a live video feed of tensor data in TensorBoard during model training. It can display model variable values, arbitrary NumPy arrays (e.g. for gradients or activations), or pre-existing image frames.
+
++++
+
+```python
+from tensorboard.plugins.beholder import Beholder
+beholder = Beholder(LOG_DIRECTORY)
+
+# inside train loop
+beholder.update(
+  session=sess,
+  arrays=list_of_np_ndarrays,  # optional argument
+  frame=np_ndarray,  # optional argument
+)
+```
++++
+By default, Beholder will visualize `tf.trainable_variables()`, but two optional
+arguments can provide additional data sources for visualization:
+
+- `arrays`: a list of NumPy `ndarray` values, interpreted as described below
+
+- `frame`: an `ndarray` of shape `[height, width, channels]` for direct display
+  via [`tf.image.encode_png`][encode-png] (if omitted, `channels` is set to 1),
+  or a function that returns such an array (to skip generation if not displayed)
+
++++
+
+![beholder-plugin](https://venturebeat.com/wp-content/uploads/2017/09/download1.png?fit=1280%2C720&strip=all)
 
 ---
 
-## Beholder
+### Print Statement in TensorFlow
+
+- Doesnt seem to work like a normal print statement works
+- Often idea is that print statement is something which is used to add on the side of our normal flow.
+- Whereas in TensorFlow, only nodes in the graph that needs to be executed will be executed.
+
+
++++
+
+#### Dangling Print operation
+![dangling-print](https://cdn-images-1.medium.com/max/1600/1*mg-elxlxrHyywhr1Lds0-Q.png)
+
++++
+
+In order for the print operation to execute properly that must be connected serially...
+
++++
+
+![serial-print](https://cdn-images-1.medium.com/max/1600/1*fp3uNcq0qQGMQZL-6eIpzA.png)
+
++++
+
+### Syntax of tensroflow print statement
+
+> tf.Print(input_, data, message=None, first_n=None, summarize=None, name=None)
+
+- input_ : A tensor passed through the graph
+- data: A list of tensors to be printed when this op is evaluated
+- message: A prefix string
+- first_n: Only log `first_n` number of times. 
+- summarize: Only prints this many entries of each tensor. If `None`, maximum of 3 elements are printed
+- name: Name of the operation
+
++++
+
+> Output slide, example
 
 ---
 
-## tf.Print()
+#### Assertion in tf
 
+- Asserts whether the supplied condition is true when evaluated.
+- If condition is evaluates to `False`, print the list of tensors in `data` and an error is thrown. `summarize` determines how many tensors to print similar to `tf.Print`.
 
+> tf.Assert(condition, data, summarize=None, name=None)
 
++++
 
+> EXAMPLE and CODE OUTPUT
+
+---
+
+## Live demo - How to use Tensorflow UI Debugger
+
+---
+
+# Other tips
+
+---
+
+- Use `Asserts`
+- Proper `logging` is essential. Log all possible paramters
+- Use numerically stable operations. Helps you against getting `NaN` problems. $\sqrt{-1}, \infty$ gradient values can cause irritation.
+- Utilize `tf.name_scope` properly, name all ops properly.
+
++++
+
+- Check `GPU` Utilization, and ensure its always at its maximum.
+- Remove histogram summaries if you are not in debugging mode. This heavily affects gpu performance.
+- `nvidia-smi -l 1` is a worthy command to remember
+- Check for I/O bounds in your program. Optimize it (data reading from and writing to disk)
+- Profile in case you suspect.
+
+---
+
+# Thank you
