@@ -297,9 +297,9 @@ Observations
 
 @ul
 
-Code written and runs with no errors
-The training slows down as the iterations increases
-The program stops running by throwing a resource exhausted error
+- Code written and runs with no errors
+- The training slows down as the iterations increases
+- The program stops running by throwing a resource exhausted error
 
 @ulend
 
@@ -310,3 +310,37 @@ The program stops running by throwing a resource exhausted error
 ![self-supervised-tracking](images/self-supervised-tracking.png)
 
 +++
+
+> Graphs Needed
+
+---
+
+#### TensorBoard's Histograms and Distributions
+
+The TensorBoard Histogram Dashboard displays how the distribution of some Tensor in your TensorFlow graph has changed over time. It does this by showing many histograms visualizations of your tensor at different points in time.
+
++++
+
+```python
+# First layer of weights
+with tf.name_scope("layer1"):
+    W1 = tf.get_variable("W1", shape=[input_size, hidden_layer_neurons],
+                         initializer=tf.contrib.layers.xavier_initializer())
+    layer1 = tf.matmul(X, W1)
+    layer1_act = tf.nn.tanh(layer1)
+    tf.summary.histogram("weights", W1)
+    tf.summary.histogram("layer", layer1)
+    tf.summary.histogram("activations", layer1_act)
+```
++++
+
+![histograms](https://cdn-images-1.medium.com/max/844/1*YbZmN9n2gWSOZCcGGdVsWg.png)
++++
+
+#### What do you observe from these histograms?
+
+![error-hist](https://i.stack.imgur.com/IttNH.jpg)
+
+[StackOverFlow Question](https://stackoverflow.com/questions/42315202/understanding-tensorboard-weight-histograms)
+
+---
