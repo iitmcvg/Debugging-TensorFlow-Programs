@@ -311,7 +311,11 @@ Observations
 
 +++
 
-> Graphs Needed
+![wrong-graph](images/wrong_graph.jpeg)
+
++++
+
+![correct-graph](images/correct_graph.jpeg)
 
 ---
 
@@ -339,8 +343,30 @@ with tf.name_scope("layer1"):
 
 #### What do you observe from these histograms?
 
++++
+
 ![error-hist](https://i.stack.imgur.com/IttNH.jpg)
 
 [StackOverFlow Question](https://stackoverflow.com/questions/42315202/understanding-tensorboard-weight-histograms)
 
++++
+### Fetching histogram summary is extremely slow!
+
+ - GPU utilization can become very low (if the serialized values are huge)
+ - Only use histogram summaries when debugging need arises.
+ - Call the histogram summaries periodically and disable them when not needed.
+
 ---
+## Tensorflow Debugger UI
+
+---
+
+## Beholder
+
+---
+
+## tf.Print()
+
+
+
+
